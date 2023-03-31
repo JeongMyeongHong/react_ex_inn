@@ -7,13 +7,8 @@ export default function Navbar() {
         <nav>
             <Ul>
                 <Li><Link to="/">Home</Link></Li>
-                <Li><Link to="/question">Question Write</Link></Li>
+                <Li><Link to="/question/write">Question Write</Link></Li>
                 <Li><Link to="/question/list">Question List</Link></Li>
-                {/*<Li><Link to="/calc">Clac</Link></Li>*/}
-                {/*<Li><Link to="/grade">Grade</Link></Li>*/}
-                {/*<Li><Link to="/login">Login</Link></Li>*/}
-                {/*<Li><Link to="/counter">Counter</Link></Li>*/}
-                {/*<Li><Link to="/sort">Sort</Link></Li>*/}
             </Ul>
         </nav>
     </div>
@@ -31,5 +26,4 @@ const Li = styled.li`
   font-size: 20px;
   text-align: center;
   display: inline-block
-
 `

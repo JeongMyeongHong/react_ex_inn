@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Layout from '../containers/Layout';
 import {questionWrite} from '../api'
+import styled from "styled-components";
 
 export function QuestionWrite() {
     const [result, setResult] = useState(``)
@@ -15,10 +16,10 @@ export function QuestionWrite() {
     }
     const onClick = async (e) => {
         e.preventDefault()
-        alert(question)
         await questionWrite({question})
             .then(res => {
                 setResult(res.data)
+                window.location.href=`question/${res.data.questionID}`
             })
             .catch(err => {
                 console.log(`에러 발생 :  ${err}`)
@@ -30,15 +31,16 @@ export function QuestionWrite() {
         <form action="">
             <h1>QuestionWrite</h1>
             <div>
-                <label htmlFor="">질문 : </label>
-                <input type="text" name="question" onChange={onChange} />
-                <input type="button" onClick={onClick} value="QuestionWrite Button"/><br/>
-                <div>인풋1 : {inputs['question']}</div>
+                <div>내용</div>
+                <Textarea placeholder="내용을 입력해 주세요." type="text" name="question" onChange={onChange} /><br/>
+                <input type="button" onClick={onClick} value="글쓰기"/><br/>
             </div>
         </form>
-        <div> ID : {result.questionID}</div>
-        <div> question : {result.question}</div>
-        <div> writtenDate : {result.writtenDate}</div>
-        <div> editedDate : {result.editedDate}</div>
     </Layout>)
 }
+
+const Textarea = styled.textarea`
+  width: 90%;
+  height: 6.25em;
+  resize: none;
+`
