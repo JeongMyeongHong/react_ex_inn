@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Layout from '../containers/Layout';
-import {questionFindOne, questionWrite, questionDelete} from '../api'
+import {questionFindOne, questionDelete} from '../api'
 import {useParams} from "react-router-dom";
 
 export function QuestionDetail() {
@@ -8,13 +8,10 @@ export function QuestionDetail() {
     const {questionID} = useParams();
     const [qID] = useState(questionID)
     const [result, setResult] = useState([])
-    const [inputs, setInputs] = useState({})
-    const {question} = inputs
 
     useEffect(() => {
         questionFindOne(qID)
             .then(res => {
-                console.log(res.data)
                 setResult(res.data)
             })
             .catch(err => {
@@ -23,16 +20,9 @@ export function QuestionDetail() {
 
     }, [qID])
 
-    const edit = async (e) => {
+    const editQuestion = async (e) => {
         e.preventDefault()
-        alert(question)
-        await questionWrite({question})
-            .then(res => {
-                setResult(res.data)
-            })
-            .catch(err => {
-                console.log(`에러 발생 :  ${err}`)
-            })
+        window.location.href=`/question/edit/${qID}`
     }
     const deleteQuestion = async (e) => {
         e.preventDefault()
@@ -89,7 +79,7 @@ export function QuestionDetail() {
                     <td>내용</td>
                     <td>{result["question"]}</td>
                 </tr>
-                <tr><button>수정</button><button onClick={deleteQuestion}>삭제</button></tr>
+                <tr><button onClick={editQuestion}>수정</button><button onClick={deleteQuestion}>삭제</button></tr>
             </tbody>
         </table>
     </Layout>)

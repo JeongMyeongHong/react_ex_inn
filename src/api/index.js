@@ -7,3 +7,4 @@ export const questionWrite = questionParam => axios.post(`${SERVER}/question/wri
 export const questionFindAll = () => axios.post(`${SERVER}/question/findAll`)
 export const questionFindOne = questionParam => axios.get(`${SERVER}/question/findOne/${questionParam}`)
 export const questionDelete = questionParam => axios.delete(`${SERVER}/question/delete/${questionParam}`)
+export const questionEdit = questionParam => axios.post(`${SERVER}/question/edit`, questionParam)

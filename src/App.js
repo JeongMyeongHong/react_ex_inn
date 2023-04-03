@@ -1,7 +1,7 @@
 import React from "react"
 import {useRoutes} from 'react-router-dom'
 import Home from "./pages/Home";
-import {QuestionWrite, QuestionList, QuestionDetail} from "./components";
+import {QuestionWrite, QuestionList, QuestionDetail, QuestionEdit} from "./components";
 
 
 export default function App() {
@@ -10,5 +10,6 @@ export default function App() {
         {path: "question/write", element: <QuestionWrite/>},
         {path: "question/list", element: <QuestionList/>},
         {path: "question/:questionID", element: <QuestionDetail/>},
+        {path: "question/edit/:questionID", element: <QuestionEdit/>},
     ]);
 }

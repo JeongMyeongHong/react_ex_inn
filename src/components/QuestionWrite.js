@@ -18,8 +18,7 @@ export function QuestionWrite() {
         e.preventDefault()
         await questionWrite({question})
             .then(res => {
-                setResult(res.data)
-                window.location.href=`question/${res.data.questionID}`
+                window.location.href=`/question/${res.data.questionID}`
             })
             .catch(err => {
                 console.log(`에러 발생 :  ${err}`)
