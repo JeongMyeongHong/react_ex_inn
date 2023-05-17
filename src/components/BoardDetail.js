@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import Layout from '../containers/Layout';
-import {questionFindOne, questionDelete} from '../api'
+import {boardFindOne, boardDelete} from '../api'
 import {useParams} from "react-router-dom";
 
-export function QuestionDetail() {
+export function BoardDetail() {
     //내용 및 제목 수정
-    const {questionID} = useParams();
-    const [qID] = useState(questionID)
+    const {boardID} = useParams();
+    const [bId] = useState(boardID)
     const [result, setResult] = useState([])
 
     useEffect(() => {
-        questionFindOne(qID)
+        boardFindOne(bId)
             .then(res => {
                 setResult(res.data)
             })
@@ -18,27 +18,27 @@ export function QuestionDetail() {
                 console.log(`에러 발생 :  ${err}`)
             })
 
-    }, [qID])
+    }, [bId])
 
-    const editQuestion = async (e) => {
+    const editBoard = async (e) => {
         e.preventDefault()
-        window.location.href=`/question/edit/${qID}`
+        window.location.href=`/board/edit/${bId}`
     }
-    const deleteQuestion = async (e) => {
+    const deleteBoard = async (e) => {
         e.preventDefault()
-        await questionDelete(qID)
+        await boardDelete(bId)
             .then(res => {
                 // eslint-disable-next-line no-restricted-globals
-                window.location.href='/question/list'
+                window.location.href='/board/list'
             })
             .catch(err => {
                 console.log(`에러 발생 :  ${err}`)
             })
     }
 
-    const viewQuestion = async (e) => {
+    const viewBoard = async (e) => {
         e.preventDefault()
-        window.location.href='/question/list'
+        window.location.href='/board/list'
     }
 
     const formatDate = (dateStr) => {
@@ -53,19 +53,18 @@ export function QuestionDetail() {
         });
     };
 
-    //return 이하 부분을 jsx라고 한다.
     return (<Layout>
         <table>
             <thead>
                 <tr>
-                    <th colSpan={3}><h1>QuestionDetail</h1></th>
+                    <th colSpan={3}><h1>게시글 보기</h1></th>
                 </tr>
             </thead>
             <tbody>
-                <tr><button onClick={viewQuestion}>목록보기</button></tr>
+                <tr><td><button onClick={viewBoard}>목록보기</button></td></tr>
                 <tr>
                     <td>글번호</td>
-                    <td>{result["questionID"]}</td>
+                    <td>{result["boardID"]}</td>
                 </tr>
                 <tr>
                     <td>작성일</td>
@@ -77,9 +76,9 @@ export function QuestionDetail() {
                 </tr>
                 <tr>
                     <td>내용</td>
-                    <td>{result["question"]}</td>
+                    <td>{result["board"]}</td>
                 </tr>
-                <tr><button onClick={editQuestion}>수정</button><button onClick={deleteQuestion}>삭제</button></tr>
+                <tr><td><button onClick={editBoard}>수정</button><button onClick={deleteBoard}>삭제</button></td></tr>
             </tbody>
         </table>
     </Layout>)

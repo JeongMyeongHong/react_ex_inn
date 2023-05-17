@@ -1,25 +1,25 @@
 import React, {useEffect, useState} from 'react';
 import Layout from '../containers/Layout';
-import {questionFindAll} from '../api'
+import {boardFindAll} from '../api'
 import {Link} from 'react-router-dom'
 import styled from "styled-components";
 
-export function QuestionList() {
+export function BoardList() {
     const [result, setResult] = useState([])
-    useEffect( () => {
-        questionFindAll()
+
+    useEffect(() => {
+        boardFindAll()
             .then(res => {
-                console.log(res.data)
                 setResult(res.data)
             })
             .catch(err => {
                 console.log(`에러 발생 :  ${err}`)
             })
-    },[])
+    }, [])
 
-    const writeQuestion = async (e) => {
+    const writeBoard = async (e) => {
         e.preventDefault()
-        window.location.href='/question/write'
+        window.location.href = '/board/write'
     }
 
     const formatDate = (dateStr) => {
@@ -34,27 +34,31 @@ export function QuestionList() {
         });
     };
 
-    //return 이하 부분을 jsx라고 한다.
     return (<Layout>
         <table>
             <thead>
-                <tr>
-                    <th colSpan={3}><h1>QuestionList</h1></th>
-                </tr>
+            <tr>
+                <th colSpan={3}><h1>게시글 목록</h1></th>
+            </tr>
             </thead>
             <tbody>
-                <tr><button onClick={writeQuestion}>글쓰기</button></tr>
-                {result.map((question, index) => (
-                    <Li><Link to={`/question/${question.questionID}`}>
-                        <tr key={index}>
-                            <td>글번호: {question.questionID}</td>
-                            <td>작성일: {formatDate(question.writtenDate)}</td>
-                            <td>수정일: {formatDate(question.editedDate)}</td>
-                            <td>내용: {question.question}</td>
-                        </tr>
-                    </Link>
-                    </Li>
-                ))}
+            <tr>
+                <td>
+                    <button onClick={writeBoard}>글쓰기</button>
+                </td>
+            </tr>
+            {result.map((board, index) => (
+                <tr key={index}>
+                    <td>
+                        <Link to={`/board/${board.boardID}`}>
+                            <Li>글번호: {board.boardID}</Li>
+                            <Li>작성일: {formatDate(board.writtenDate)}</Li>
+                            <Li>수정일: {formatDate(board.editedDate)}</Li>
+                            <Li>내용: {board.board}</Li>
+                        </Link>
+                    </td>
+                </tr>
+            ))}
             </tbody>
         </table>
     </Layout>)

@@ -11,12 +11,28 @@ const container = document.getElementById('root');
 const root = ReactDOMClient.createRoot(container);
 
 root.render(
-    <React.StrictMode>
+    // <React.StrictMode>
         <BrowserRouter>
             <App />
         </BrowserRouter>
-    </React.StrictMode>
+    // </React.StrictMode>
 );
+//
+// const SpringCloudConfig = require('spring-cloud-config');
+//
+// const configOptions = {
+//     configPath: __dirname + '/config',
+//     activeProfiles: ['dev1'],
+//     level: 'debug'
+// };
+// let myConfig;
+//
+// SpringCloudConfig.load(configOptions).then(theConfig => {
+//     myConfig = theConfig
+//     // now run your application with the loaded config props.
+//     // do this by saving the returned config object somewhere,
+//     // or by using the SpringCloudConfig.instance() helper.
+// })
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

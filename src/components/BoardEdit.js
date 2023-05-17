@@ -2,18 +2,18 @@ import React, {useEffect, useState} from 'react';
 import Layout from '../containers/Layout';
 import styled from "styled-components";
 import {useParams} from "react-router-dom";
-import {questionEdit, questionFindOne} from "../api";
+import {boardEdit, boardFindOne} from "../api";
 
-export function QuestionEdit() {
+export function BoardEdit() {
 
-    const {questionID} = useParams();
+    const {boardID} = useParams();
     const [result, setResult] = useState(``)
     const [inputs, setInputs] = useState({})
-    const {question} = inputs
+    const {board} = inputs
 
 
     useEffect(() => {
-        questionFindOne(questionID)
+        boardFindOne(boardID)
             .then(res => {
                 setResult(res.data)
             })
@@ -21,18 +21,18 @@ export function QuestionEdit() {
                 console.log(`에러 발생 :  ${err}`)
             })
 
-    }, [questionID])
+    }, [boardID])
     const onChange = (e) => {
         e.preventDefault()
         const {value, name} = e.target
         setInputs({...inputs, [name]: value})
     }
 
-    const editQuestion = async (e) => {
+    const editBoard = async (e) => {
         e.preventDefault()
-        await questionEdit({question:question, questionID:questionID, writtenDate:result['writtenDate']})
+        await boardEdit({board:board, boardID:boardID, writtenDate:result['writtenDate']})
             .then(() => {
-                window.location.href=`/question/${questionID}`
+                window.location.href=`/board/${boardID}`
             })
             .catch(err => {
                 console.log(`에러 발생 :  ${err}`)
@@ -42,17 +42,16 @@ export function QuestionEdit() {
     const cancel = async (e) => {
         e.preventDefault()
         alert("수정 취소")
-        window.location.href=`/question/${questionID}`
+        window.location.href=`/board/${boardID}`
     }
 
-    //return 이하 부분을 jsx라고 한다.
     return (<Layout>
         <form action="">
-            <h1>QuestionWrite</h1>
+            <h1>boardWrite</h1>
             <div>
                 <div>내용</div>
-                <Textarea placeholder="내용을 입력해 주세요." type="text" name="question" onChange={onChange} defaultValue={result["question"]}/><br/>
-                <input type="button" onClick={editQuestion} value="수정하기"/>
+                <Textarea placeholder="내용을 입력해 주세요." type="text" name="board" onChange={onChange} defaultValue={result["board"]}/><br/>
+                <input type="button" onClick={editBoard} value="수정하기"/>
                 <input type="button" onClick={cancel} value="수정취소"/><br/>
             </div>
         </form>

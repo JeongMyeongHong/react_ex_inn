@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import Layout from '../containers/Layout';
-import {questionWrite} from '../api'
+import {boardWrite} from '../api'
 import styled from "styled-components";
 
-export function QuestionWrite() {
-    const [result, setResult] = useState(``)
+export function BoardWrite() {
+    // const [result, setResult] = useState(``)
 
     const [inputs, setInputs] = useState({})
-    const { question } = inputs
+    const { board } = inputs
 
     const onChange = (e) => {
         e.preventDefault()
@@ -16,22 +16,22 @@ export function QuestionWrite() {
     }
     const onClick = async (e) => {
         e.preventDefault()
-        await questionWrite({question})
+        await boardWrite({board})
             .then(res => {
-                window.location.href=`/question/${res.data.questionID}`
+                window.location.href=`/board/${res.data.boardID}`
             })
             .catch(err => {
                 console.log(`에러 발생 :  ${err}`)
             })
+        
     }
 
-    //return 이하 부분을 jsx라고 한다.
     return (<Layout>
         <form action="">
-            <h1>QuestionWrite</h1>
+            <h1>boardWrite</h1>
             <div>
                 <div>내용</div>
-                <Textarea placeholder="내용을 입력해 주세요." type="text" name="question" onChange={onChange} /><br/>
+                <Textarea placeholder="내용을 입력해 주세요." type="text" name="board" onChange={onChange} /><br/>
                 <input type="button" onClick={onClick} value="글쓰기"/><br/>
             </div>
         </form>

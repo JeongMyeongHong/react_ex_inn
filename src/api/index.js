@@ -1,10 +1,11 @@
 import axios from 'axios';
 
-const SERVER = `http://localhost:8080`
+const SERVER = `http://localhost:`
+const PORT = `8080`
 
-export const questionHome = questionParam => axios.post(`${SERVER}/question/`, questionParam)
-export const questionWrite = questionParam => axios.post(`${SERVER}/question/write`, questionParam)
-export const questionFindAll = () => axios.post(`${SERVER}/question/findAll`)
-export const questionFindOne = questionParam => axios.get(`${SERVER}/question/findOne/${questionParam}`)
-export const questionDelete = questionParam => axios.delete(`${SERVER}/question/delete/${questionParam}`)
-export const questionEdit = questionParam => axios.post(`${SERVER}/question/edit`, questionParam)
+export const boardWrite = boardParam => axios.post(`${SERVER+PORT}/board/write`, boardParam)
+export const boardFindAll = () => axios.post(`${SERVER+PORT}/board/findAll`)
+export const boardFindOne = boardParam => axios.get(`${SERVER+PORT}/board/findOne/${boardParam}`)
+export const boardDelete = boardParam => axios.delete(`${SERVER+PORT}/board/delete/${boardParam}`)
+export const boardEdit = boardParam => axios.post(`${SERVER+PORT}/board/edit`, boardParam)
+export const predictAlarm = () => axios.get(`${SERVER+PORT}/ChannelAi/rabbit`)
