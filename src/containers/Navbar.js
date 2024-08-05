@@ -8,8 +8,7 @@ export default function Navbar() {
             <Ul>
                 <Li><Link to="/">Home</Link></Li>
                 <Li><Link to="/board/list">샘플 게시판</Link></Li>
-                <Li><Link to="/channelAi/alarm">CH-AI-Alarm</Link></Li>
-                <Li><Link to="/fastapi-test">fastAPI-test</Link></Li>
+                <Li><Link to="/login">로그인</Link></Li>
             </Ul>
         </nav>
     </div>
